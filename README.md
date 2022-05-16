@@ -42,9 +42,19 @@ The preprocessed data will be in ./data/processed/en-xx.
 
 ### Pretrain a language model (with MLM)
 
+To train with multiple GPUs use:
+```
+export NGPU=8; python -m torch.distributed.launch --nproc_per_node=$NGPU train.py
+```
+
+To train with multiple GPUs and half precision use:
+```
+export NGPU=8; python -m torch.distributed.launch --nproc_per_node=$NGPU train.py --fp16 True --amp 1 
+```
+
 The following script will pretrain a model with the MLM objective for English and French:
 ```
-python train.py 
+python train.py                               \
 --exp_name enfr_mlm                           \
 --dump_path ./dumped                          \
 --data_path ./data/processed/en-fr/           \ 
@@ -65,10 +75,10 @@ python train.py
 ```
 ### Fine-tune an UNMT model with DAE, BT and language discriminator loss
 
-The following script will fine-tune an UNMT model:
+The following script will fine-tune an UNMT model **with language discriminator loss**:
 ```
-python train.py \
---exp_name unmt_en_fr_pretrained                              \
+python train.py                                               \
+--exp_name unmt_en_fr_pretrained_lang_dis                     \
 --dump_path ./dumped/                                         \
 --reload_model 'mlm_enfr_1024.pth,mlm_enfr_1024.pth'          \
 --data_path ./data/processed/en-fr/                           \
@@ -98,4 +108,37 @@ python train.py \
 --use_language_discriminator true                             \
 --language_discriminator_loss_weight 1.0                      \
 --n_layer_dis 2
+```
+
+
+The following script will fine-tune an UNMT model **without language discriminator loss**:
+```
+python train.py                                               \
+--exp_name unmt_en_fr_pretrained                              \
+--dump_path ./dumped/                                         \
+--reload_model 'mlm_enfr_1024.pth,mlm_enfr_1024.pth'          \
+--data_path ./data/processed/en-fr/                           \
+--lgs 'en-fr'                                                 \
+--ae_steps 'en,fr'                                            \
+--bt_steps 'en-fr-en,fr-en-fr'                                \
+--word_shuffle 3                                              \
+--word_dropout 0.1                                            \
+--word_blank 0.1                                              \
+--lambda_ae '0:1,100000:0.1,300000:0'                         \
+--encoder_only false                                          \
+--emb_dim 256                                                 \
+--n_layers 6                                                  \
+--n_heads 8                                                   \
+--dropout 0.1                                                 \
+--attention_dropout 0.1                                       \
+--gelu_activation true                                        \
+--tokens_per_batch 1000                                       \
+--batch_size 32                                               \
+--bptt 256                                                    \
+--optimizer adam_inverse_sqrt,beta1=0.9,beta2=0.98,lr=0.0001  \
+--epoch_size 200000                                           \
+--eval_bleu true                                              \
+--stopping_criterion 'valid_en-fr_mt_bleu,10'                 \
+--validation_metrics 'valid_en-fr_mt_bleu'                    \
+--max_epoch 100                                               
 ```
