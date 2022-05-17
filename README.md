@@ -11,6 +11,7 @@ Based on [XLM](https://github.com/facebookresearch/XLM) codebase.
 - [NumPy](http://www.numpy.org/) (tested on version 1.15.4)
 - [PyTorch](http://pytorch.org/) (tested on version 1.2.0 and 1.4.0)
 - [Apex](https://github.com/NVIDIA/apex#quick-start) (for fp16 training)
+- [jieba](https://github.com/fxsjy/jieba) (A tokenizer for chinese, simply pip install jieba)
 
 #### Download data 
 
@@ -96,7 +97,7 @@ python train.py                                               \
 --dropout 0.1                                                 \
 --attention_dropout 0.1                                       \
 --gelu_activation true                                        \
---tokens_per_batch 1000                                       \
+--tokens_per_batch 2000                                       \
 --batch_size 32                                               \
 --bptt 256                                                    \
 --optimizer adam_inverse_sqrt,beta1=0.9,beta2=0.98,lr=0.0001  \
@@ -132,7 +133,7 @@ python train.py                                               \
 --dropout 0.1                                                 \
 --attention_dropout 0.1                                       \
 --gelu_activation true                                        \
---tokens_per_batch 1000                                       \
+--tokens_per_batch 2000                                       \
 --batch_size 32                                               \
 --bptt 256                                                    \
 --optimizer adam_inverse_sqrt,beta1=0.9,beta2=0.98,lr=0.0001  \
