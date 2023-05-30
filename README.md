@@ -2,7 +2,7 @@
 
 Based on [XLM](https://github.com/facebookresearch/XLM) codebase.
 
-### Prerequisites 
+### Prerequisites
 
 #### Dependencies
 (the same as the environment as the project [Improving the Lexical Ability of Pretrained Language Models for Unsupervised Neural Machine Translation](https://github.com/alexandra-chron/lexical_xlm_relm))
@@ -13,7 +13,7 @@ Based on [XLM](https://github.com/facebookresearch/XLM) codebase.
 - [Apex](https://github.com/NVIDIA/apex#quick-start) (for fp16 training)
 - [jieba](https://github.com/fxsjy/jieba) (A tokenizer for chinese, simply pip install jieba)
 
-#### Download data 
+#### Download data
 
 Download the monolinual data and valid/test sets for evaluation of a language pair (en-xx), taking en-fr and en-de for example:
 ```
@@ -142,4 +142,17 @@ python train.py                                               \
 --stopping_criterion 'valid_en-fr_mt_bleu,10'                 \
 --validation_metrics 'valid_en-fr_mt_bleu'                    \
 --max_epoch 100                                               
+```
+
+### References
+
+Please cite [[1]](https://arxiv.org/abs/2305.17182) if you found the resources in this repository useful.
+
+```
+@article{liu2023copying,
+  title={On the Copying Problem of Unsupervised NMT: A Training Schedule with a Language Discriminator Loss},
+  author={Liu, Yihong and Chronopoulou, Alexandra and Schuetze, Hinrich and Fraser, Alexander},
+  journal={arXiv preprint arXiv:2305.17182},
+  year={2023}
+}
 ```
