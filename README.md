@@ -146,13 +146,22 @@ python train.py                                               \
 
 ### References
 
-Please cite [[1]](https://arxiv.org/abs/2305.17182) if you found the resources in this repository useful.
+Please cite [[1]](https://aclanthology.org/2023.iwslt-1.48/) if you found the resources in this repository useful.
 
 ```
-@article{liu2023copying,
-  title={On the Copying Problem of Unsupervised NMT: A Training Schedule with a Language Discriminator Loss},
-  author={Liu, Yihong and Chronopoulou, Alexandra and Schuetze, Hinrich and Fraser, Alexander},
-  journal={arXiv preprint arXiv:2305.17182},
-  year={2023}
+@inproceedings{liu-etal-2023-copying,
+    title = "On the Copying Problem of Unsupervised {NMT}: A Training Schedule with a Language Discriminator Loss",
+    author = {Liu, Yihong  and
+      Chronopoulou, Alexandra  and
+      Sch{\"u}tze, Hinrich  and
+      Fraser, Alexander},
+    booktitle = "Proceedings of the 20th International Conference on Spoken Language Translation (IWSLT 2023)",
+    month = jul,
+    year = "2023",
+    address = "Toronto, Canada (in-person and online)",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.iwslt-1.48",
+    doi = "10.18653/v1/2023.iwslt-1.48",
+    pages = "491--502"
 }
 ```
